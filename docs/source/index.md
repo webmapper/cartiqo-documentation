@@ -3,18 +3,22 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to cartiqo_docs's documentation!
-========================================
+Welcome to the Cartiqo Vector Tile stack documentation!
+=======================================================
+
+Dit si de eerste poging toto.. 
+
+Inhoud:
+-------
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   
+   hellworld.md
+   introductie.md
+   layers.md
+   features.md
+   zoom-levels.md
+   source-data.md
 
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
 * :ref:`search`

@@ -24,7 +24,7 @@ copyright = '2019, Webmapper'
 author = 'Webmapper'
 
 # The short X.Y version
-version = 'beta'
+version = 'latest'
 # The full version, including alpha/beta/rc tags
 release = 'latest'
 
@@ -65,10 +65,10 @@ language = 'En'
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = []
+exclude_patterns = ['.odf']
 
 # The name of the Pygments (syntax highlighting) style to use.
-pygments_style = None
+pygments_style = 'sphinx'
 
 
 def setup(app):
@@ -82,7 +82,7 @@ def setup(app):
 # a list of builtin themes.
 #
 html_logo = "cartiqo-circle.png"
-html_theme = 'sphinx_rtd_theme'
+# html_theme = 'default'
 # html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
 
 # Theme options are theme-specific and customize the look and feel of a theme
@@ -209,7 +209,7 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
     (master_doc, 'cartiqo_docs.tex', 'cartiqo\\_docs Documentation',
-     'Niene', 'manual'),
+     'Webmapper', 'manual'),
 ]
 
 
