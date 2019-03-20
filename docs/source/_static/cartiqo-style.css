@@ -1,8 +1,8 @@
-header {
-  background-color: red;
+.navbar {
+  background-color: #317581;
 }
 
 body{
-     background-color: red;
-
+    font-family: Lato;
 }
+

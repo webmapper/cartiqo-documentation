@@ -24,9 +24,9 @@ copyright = '2019, Webmapper'
 author = 'Webmapper'
 
 # The short X.Y version
-version = '1'
+version = 'beta'
 # The full version, including alpha/beta/rc tags
-release = 'beta/setup'
+release = 'latest'
 
 
 # -- General configuration ---------------------------------------------------
@@ -181,7 +181,7 @@ html_static_path = ['_static']
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'cartiqo_docsdoc'
+htmlhelp_basename = 'cartiqo_doc'
 
 
 # -- Options for LaTeX output ------------------------------------------------
