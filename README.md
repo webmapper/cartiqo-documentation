@@ -1,3 +1,2 @@
-# Documentatie
-
-Documentatie van de Vector Tiles 
+# cartiqo-documentation
+Cartiqo Vector Tile stack documentation. 
