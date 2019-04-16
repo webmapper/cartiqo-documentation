@@ -1,5 +1,7 @@
 # Cartiqo Technical Specs BETA release
 
+Cartiqo is a Vector Tile product based on open source geodate of the Netherlands. It provides a full and detailed map of the Netherlands customizable to your own likes. 
+
 ## Introduction
 
 
@@ -42,7 +44,7 @@ OR
     <script>
         var map = new mapboxgl.Map({
             container: 'map',
-            style: 'https://ta.webmapper.nl/wm/styles/wm_topo.json',
+            style: 'https://ta.webmapper.nl/wm/styles/topography.json',
             zoom: 14.5,
             pitch: 60,
             bearing: 17.6,
@@ -85,6 +87,22 @@ A quick overview:
 
 ![img](./img/cartiqo_schema.png)
 
+### Fields
+
+All layers contain the following general fields, and will therefore be described here only once:
+
+* `original_id`
+* `name`
+
+###### `originalid`
+
+The `original_id` contains the feature id from the original dataset. This can be the Natural Earth dataset, Top10NL, BGT or even OSM ID's. No transformation is done on this number. When the `original_id` is missing it means a custom geometric transformation (other than simplification) on the feature has occurred, like merging features or transformation from polygon to line. These new features can therefore not be mapped back to its original source.
+
+###### `name`
+
+The Dutch name of the feature if provided by the source data. 
+
+
 #### `water` (polygon)
 
 **`water`** contains all water area polygons like oceans, sea, lakes and rivers. On lower zoom levels it contains all oceans from the Natural Earth dataset. At higher zoom levels it contains all water bodies from The Netherlands. Including the Wadden.  
@@ -95,14 +113,6 @@ A quick overview:
 * `name`
 * `type`
 * `subtype`
-
-###### `original_id`
-
-The `original_id` contains the feature id from the original dataset. This can be the Natural Earth dataset, Top10NL, BGT or even OSM ID's. No transformation is done on this number. When the `original_id` is missing it means a custom geometric transformation (other than simplification) on the feature has occurred, like merging features or transformation from polygon to line. These new features can therefore not be mapped back to its original source.
-
-###### `name`
-
-The Dutch name of the feature if provided by the source data. 
 
 ###### `type`
 
@@ -119,7 +129,7 @@ One of:
 
 **`natural`** contains all nature polygons like nature areas, grass fields and forest areas. It describes the physical material of the land surface. 
 
-Together with the layers **`agriculture`** and **`builtup`** it covers the total surface of the Netherlands from zoom level 13 and higher. 
+Together with the layers **`agriculture`**, **`infrastructure`** and **`builtup`** it covers the total surface of the Netherlands from zoom level 13 and higher. 
 
 
 ##### Fields
@@ -129,30 +139,16 @@ Together with the layers **`agriculture`** and **`builtup`** it covers the total
 * `type`
 * `subtype`
 
-###### `original_id`
-
-The `original_id` contains the feature id from the original dataset. This can be the Natural Earth dataset, Top10NL, BGT or even OSM ID's. No transformation is done on this number. When the `original_id` is missing it means a custom geometric transformation (other than simplification) on the feature has occurred, like merging features or transformation from polygon to line. These new features can therefore not be mapped back to its original source.
-
-###### `name`
-
-The Dutch name of the feature if provided by the source data. 
-
 ###### `type`
 
 The main type of the feature. 
 
 One of:
 
-* `high`
+* `high` is all natural vegetation like trees and forest areas. Including tree lines. 
+* `low` covers all natural vegetation defined as grass, heather and shrubs. 
 
-`high` is all natural vegetation like trees and forest areas. Including tree lines. 
-* `low`
-
-`low` covers all natural vegetation defined as grass, heather and shrubs. 
-
-* `bare`
-
-`bare` are features describing natural areas without vegetation like sand areas: dunes and sand and rock plains. 
+* `bare` are features describing natural areas without vegetation like sand areas: dunes and sand and rock plains. 
 
 
 ###### `subtype`
@@ -185,14 +181,6 @@ The **`builtup`** layer contains all the urban areas and buildings. On lower zoo
 * `type`
 * `subtype`
 
-###### `original_id`
-
-The `original_id` contains the feature id from the original dataset. This can be the Natural Earth dataset, Top10NL, BGT or even OSM ID's. No transformation is done on this number. When the `original_id` is missing it means a custom geometric transformation (other than simplification) on the feature has occurred, like merging features or transformation from polygon to line. These new features can therefore not be mapped back to its original source.
-
-###### `name`
-
-The Dutch name of the feature if provided by the source data. 
-
 ###### `type`
 
 The main type of the feature. 
@@ -200,62 +188,77 @@ The main type of the feature.
 One of:
 
 * `area`
+* `courtyard`
 * `building`
 * `wall`
 
 
 #### `infrastructure` (polygon)
 
+All physical areas human-made and not natural or vegetation covered. Mostly asphalt or stone coverages and found inside urban areas. 
+
+
+##### Fields
+
+* `original_id`
+* `name`
+* `type`
+* `subtype`
+
+###### `type`
+
+The main type of the feature. 
+
+One of:
+
+* `parking`
+* `road `
+* `railway`
+* `jetty`
+* `tunnel`
+* `bridge`
+* `runway`
+* `pavement` 
+
+
 #### `agricultural` (polygon)
+
+
+##### Fields
+
+* `original_id`
+* `name`
+* `type`
+* `subtype`
+
+###### `type`
+
+The main type of the feature. 
+
+One of:
+  
+  * `agriculture`
+  * `arboriculture` 
+  * `pasture`
+  * `greenhouse`
+  * `fallow`
 
 #### `waterline` (line)
 
+ {3m,6m,12m,50m,125m,wide}
+
 #### `railways` (line)
-
+ {rail,tram,metro,industrial,touristic,light_rail} 
 #### `roads` (line)
-
+{highway,motorway,main,secondary,local,bike,path} 
 #### `boundaries` (line)
-
+ {country,province,municipality} 
 #### `pois` (point)
-
+ {food_drink,public_building,public_transport} 
 #### `labels` (point)
-
+ {place,admin,water,nature,industrial}  
 
 ### Zoom levels
 
 ### Source Data
 
-
-
- {agriculture,arboriculture,pasture}
- {highway,motorway,main}
- {parking,road,railway,jetty,runway}
- {agriculture,arboriculture,pasture,greenhouse}
- {3m,6m,12m,50m,125m,wide}
- {food_drink,public_building,public_transport}
- {railway}
- {sea,tidal_flat,lake,water_way}
- {country,province}
- {rail,tram,metro,industrial,touristic,light_rail}
- {country,province,municipality}
- {area,building,wall}
- {area,building}
- {place,admin,water}
- {agriculture,arboriculture,greenhouse}
- {high,bare}
- {place,admin}
- {highway,motorway,main,secondary}
- {parking,road,railway,jetty,tunnel,bridge,runway,pavement}
- {area}
- {agriculture,arboriculture,pasture,greenhouse,fallow}
- {highway,motorway,main,secondary,local}
- {50m,125m,wide}
- {highway,motorway}
- {sea}
- {sea,lake,water_way}
- {highway}
- {rail}
- {place,admin,water,nature,industrial}
- {highway,motorway,main,secondary,local,bike,path}
- {high,low,bare}
- {6m,12m,50m,125m,wide}
