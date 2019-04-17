@@ -72,31 +72,43 @@ You can build your own custom style according to the [MapboxGL.js Styling specs]
 
 ### Philosophy
 
-The Cartiqo vector tiles are build with the aim to have as less as possible styling rules to create a clear map. 
+The Cartiqo vector tiles are build with the aim to have as less as possible styling rules to create a clear map. Data rearrangement desisions are always made with a cartographic goal in mind. 
 
-In theory it will be possible to style a map by simply assigning one color per layer and you will be done. For example, blue for water, green for nature and grey for builtup areas. This would already give you a pretty good map. 
+In theory it will be possible to style a map by simply assigning one color per layer and you will be done. For example, blue for water, green for nature and grey for built-up areas. This would already give you a pretty good map. 
 
-To add more detail to the map a distinction can be made by the `type` in the layer. The `type` is the first main division that can be given to a layer.
+To add more cartographic detail to the map a distinction can be made by the `type` in the layer. The `type` is the first main division that can be given to a layer which is interesting for cartographic reasons. Like natural is divided in high vegetation and low vegetation, a main distinction for the use of dark green and lighter shades of green.
 
-Even more detail can be found when using the `subtypes`. The second subdevision of the `type` of a layer.
+Even more detail can be found when using the `subtypes`. This is a subdevision of the `type`.
 
-Not every layer has as many subdevisions. Some even contain a `subsubtype` when needed. 
+Not every layer has the same amount of subdevisions. All layers contain `type`, most also contain a `subtype` and some even contain a `subsubtype` when needed. 
 
 ### Layers
 A quick overview:
 
 ![img](./img/cartiqo_schema.png)
 
+* [ `water`](#water)
+* [ `natural`](#natural)
+* [ `builtup`](#builtup)
+* [ `infrastructure`](#infrastructure)
+* [ `agricultural`](#agricultural)
+* [ `waterline`](#waterline)
+* [ `railways`](#railways)
+* [ `roads`](#roads)
+* [ `boundaries`](#boundaries)
+* [ `pois`](#pois)
+* [ `labels`](#labels)
+
 ### Fields
 
 All layers contain the following general fields, and will therefore be described here only once:
 
-* `original_id`
+* `originalid`
 * `name`
 
 ###### `originalid`
 
-The `original_id` contains the feature id from the original dataset. This can be the Natural Earth dataset, Top10NL, BGT or even OSM ID's. No transformation is done on this number. When the `original_id` is missing it means a custom geometric transformation (other than simplification) on the feature has occurred, like merging features or transformation from polygon to line. These new features can therefore not be mapped back to its original source.
+The `originalid` contains the feature id from the original dataset. This can be the Natural Earth dataset, Top10NL, BGT or even OSM ID's. No transformation is done on this number. When the `originalid` is missing it means a custom geometric transformation (other than simplification) on the feature has occurred, like merging features or transformation from polygon to line. These new features can therefore not be mapped back to its original source.
 
 ###### `name`
 
@@ -109,7 +121,7 @@ The Dutch name of the feature if provided by the source data.
 
 ##### Fields
 
-* `original_id`
+* `originalid`
 * `name`
 * `type`
 * `subtype`
@@ -134,7 +146,7 @@ Together with the layers **`agriculture`**, **`infrastructure`** and **`builtup`
 
 ##### Fields
 
-* `original_id`
+* `originalid`
 * `name`
 * `type`
 * `subtype`
@@ -176,7 +188,7 @@ The **`builtup`** layer contains all the urban areas and buildings. On lower zoo
 
 ##### Fields
 
-* `original_id`
+* `originalid`
 * `name`
 * `type`
 * `subtype`
@@ -200,7 +212,7 @@ All physical areas human-made and not natural or vegetation covered. Mostly asph
 
 ##### Fields
 
-* `original_id`
+* `originalid`
 * `name`
 * `type`
 * `subtype`
@@ -226,7 +238,7 @@ One of:
 
 ##### Fields
 
-* `original_id`
+* `originalid`
 * `name`
 * `type`
 * `subtype`
