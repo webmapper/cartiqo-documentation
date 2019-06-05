@@ -244,6 +244,8 @@ This is useful for writing a map style and allows for alternative use of the dat
 * [ `pois`](#pois)
 * [ `labels`](#labels)
 
+------------------------------------------------------
+
 #### `water` (polygon)
 
 **`water`** contains all water area polygons like oceans, sea, lakes and rivers. On lower zoom levels it contains all oceans from the Natural Earth dataset. At higher zoom levels it contains all water bodies from The Netherlands. Including the Wadden.
@@ -266,6 +268,7 @@ One of:
 * `lake`
 * `water_way`
 
+------------------------------------------------------
 
 #### `waterline` (line)
 
@@ -287,6 +290,8 @@ The type of a water line is the width given by the source data.
 * 50m
 * 125m
 * wide
+
+------------------------------------------------------
 
 #### `natural` (polygon)
 
@@ -332,6 +337,8 @@ The subtype of the feature describes the type in even more detail and can be use
     * `rock`
     * `dune`
 
+------------------------------------------------------
+
 #### `builtup` (polygon)
 
 The **`builtup`** layer contains all the urban areas and buildings. On lower zoom levels a city is represented as an urban area and on higher zoom levels the areas will be split up into building blocks and later by buildings and even more detail, entrances, walls and covers. 
@@ -356,6 +363,7 @@ One of:
 * `building`
 * `wall`
 
+------------------------------------------------------
 
 #### `infrastructure` (polygon)
 
@@ -385,6 +393,7 @@ One of:
 * `runway`
 * `pavement` 
 
+------------------------------------------------------
 
 #### `agricultural` (polygon)
 
@@ -412,6 +421,7 @@ One of:
   * `greenhouse`
   * `fallow`
 
+------------------------------------------------------
 
 #### `railways` (line)
 
@@ -435,6 +445,8 @@ One of:
 
 If line feature is tunnel or not:  `true` `false`
 
+------------------------------------------------------
+
 #### `roads` (line)
 
 ##### Fields
@@ -455,11 +467,18 @@ If line feature is tunnel or not:  `true` `false`
 * `local`
 * `bike`
 * `path`
+* 'ferry'
+
+
+###### `tunnel`
+
+If line feature is tunnel or not:  `true` `false`
 
 ###### `road_number`
 
 Ducht Road number classification number if available. Like A roads and N road numbers. Can be used for double labeling. 
  
+------------------------------------------------------
 
 #### `boundaries` (line)
 
@@ -476,6 +495,14 @@ Ducht Road number classification number if available. Like A roads and N road nu
 * `province`
 * `municipality`
 
+###### `subtype` 
+
+* `country`
+    * `foreign`
+    * `domestic`
+
+
+------------------------------------------------------
 
 #### `pois` (point)
 
@@ -485,12 +512,56 @@ Ducht Road number classification number if available. Like A roads and N road nu
 * `name`
 * `type`
 * `subtype`
+* `hierarchy`
 
 ###### `type`
 
 * `food_drink`
+All food and drink occasions. 
 * `public_building`
+A public building with general purposes.
+* `public_space`
+Public areas which are not buildings but fields or areas with a functionality. Like a harbour, industry, dog park or playground. Nature areas which describe physical areas are not in this layer but in Labels. POIs describe an area with a human decided function assigned. 
+
 * `public_transport` 
+Public transport stops. 
+
+* `commercial`
+Commercial shops other then food and drink. 
+
+###### `subtype`
+
+* `food_drink`
+    * `drink`
+    * `food`
+* `public_building`
+    * `culture`
+    * `education`
+    * `healthcare`
+    * `public_building`
+* `public_space`
+    * `industry`
+    * `green`
+    * `parking`
+    * `sport`
+    * `water`
+* `public_transport` 
+    * `airport`
+    * `bus_stop`
+    * `ferry_terminal`
+    * `metro_entrance`
+    * `train_station`
+    * `tram_stop`
+* `commercial`
+    * `groceries`
+    * `convenience`
+    * `fuel`
+
+###### `subsubtype`
+
+The `subsubtype` of a POI feature is the original description from source data the POI is derived from. (mainly OSM) 
+
+------------------------------------------------------
 
 #### `labels` (point)
 
@@ -521,7 +592,6 @@ Relavant water names of physical areas.  (not harbors)
 * `nature`
 
 Relevant nature area names. Only large nature areas. (not gardens and dog parks)
-
 
 ###### `subtype` & `subsubtypes
 
