@@ -4,26 +4,31 @@ Cartiqo is a Vector Tile product based on open source geodate of the Netherlands
 
 ## Introduction
 
+Have a look at [cartiqo.nl](cartiqo.nl). 
 
-See [cartiqo.nl](cartiqo.nl)
-
-
-## Display a Cartiqo Map
+## How to display a Cartiqo Map
 
 ### Endpoint
 
+There is a tile JSON available pointing to the tile sources, having the right attribution and describing the available features. *according to the [TileJSON spec](https://github.com/mapbox/tilejson-spec)*
+ 
     https://ta.webmapper.nl/wm/styles/tile.json
 
-OR 
+Or you can directly get the pbf tiles at: 
 
-    "tiles": [ 
-        "https://ta.webmapper.nl/wm/cartiqo/{z}/{x}/{y}",
-        "https://tb.webmapper.nl/wm/cartiqo/{z}/{x}/{y}",
-        "https://tc.webmapper.nl/wm/cartiqo/{z}/{x}/{y}" 
-    ]
+    "https://ta.webmapper.nl/wm/cartiqo/{z}/{x}/{y}"
+    "https://tb.webmapper.nl/wm/cartiqo/{z}/{x}/{y}"
+    "https://tc.webmapper.nl/wm/cartiqo/{z}/{x}/{y}" 
+
+
+Please reference to Cartiqo in the attribution:
+
+    "attribution": "Tiles &copy; <a href='https://cartiqo.nl' target='_blank' title'Powered by Cartiqo'>Cartiqo</a>. Map data: &copy; <a href='https://cbs.nl' target='_blank'>CBS</a>  &copy; <a href='https://kadaster.nl' target='_blank'>Kadaster</a> &copy; <a href='https://osm.org/copyright'>OpenStreetMap</a>.<br/>Cartography: &copy; <a href='https://webmapper.net' target='_blank'>Webmapper</a>."
+
 
 ### Example with [MapboxGL.js](https://docs.mapbox.com/mapbox-gl-js/overview/)
 
+Cartiqo can easily be used in a Mapbox GL js map. Without the use of a Mapbox access token! 
 
 ``` html
 <!DOCTYPE html>
@@ -55,20 +60,100 @@ OR
 </html>
 ```
 
+### Example with [Leaflet.js Mapbox Gl Plugin](https://github.com/mapbox/mapbox-gl-leaflet)
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <title>Cartiqo Topo style map example</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.js"></script>
+    <script src="https://cdn.maptiler.com/mapbox-gl-js/v0.53.0/mapbox-gl.js"></script>
+    <script src="https://cdn.maptiler.com/mapbox-gl-leaflet/latest/leaflet-mapbox-gl.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.css" />
+    <link rel="stylesheet" href="https://cdn.maptiler.com/mapbox-gl-js/v0.53.0/mapbox-gl.css" />
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      var map = L.map('map').setView([ 52.02624, 5.17197], 11);
+      var gl = L.mapboxGL({
+        accessToken: 'not-needed',
+        style: 'https://ta.webmapper.nl/wm/styles/topography.json'
+      }).addTo(map);
+    </script>
+  </body>
+</html>
+```
+
 ## Styling a Cartiqo Map
 
 ### Available styles:
 
+* https://ta.webmapper.nl/wm/styles/topography.json
 * https://ta.webmapper.nl/wm/styles/crafty.json
 * https://ta.webmapper.nl/wm/styles/data_lines.json
-* https://ta.webmapper.nl/wm/styles/topography.json
 
 ### custom styles
 
 You can build your own custom style according to the [MapboxGL.js Styling specs](https://docs.mapbox.com/mapbox-gl-js/style-spec/)
 
+Example :
+
+```js
+{
+    "version": 8,
+    "name": "Example",
+    "glyphs": "https://ta.webmapper.nl/wm/glyphs/{fontstack}/{range}.pbf",
+    "sprite": "https://ta.webmapper.nl/wm/sprite",
+    "sources": {
+        "cartiqo": {
+            "type": "vector",
+            "url": "https://ta.webmapper.nl/wm/styles/tile.json"
+        }
+    },
+    "layers": [
+        {
+            "id": "water",
+            "source":"cartiqo",
+            "source-layer":"water",
+            "type": "fill",
+            "paint": {
+                "fill-color": "#6d87a0"
+            }
+        }
+    ]
+}
+```
+
+### Glyphs
+
+For Cartiqo we have some Fonts available at `https://ta.webmapper.nl/wm/glyphs/{fontstack}/{range}.pbf`
+
+* `ArbutusSlab`
+* `Comfortaa`
+* `DosisLight`
+* `Giraffey`
+* `Lato`
+* `LatoSemi`
+* `Open Sans Regular`
+* `RalewayBold`
+
 
 ## Vector Tile Contents
+
+1. [Philosophy](#Philosophy)
+2. [Layer overview](#Layers)
+3. [Fields explanation](#Fields)
+4. [Source data](#Source-Data )
+5. [In depth description of data layers](#Data-Layers)
+6. [In depth description per zoom level](#Data-per-Zoom-Level)
+
 
 ### Philosophy
 
@@ -87,51 +172,39 @@ A quick overview:
 
 ![img](./img/cartiqo_schema.png)
 
-* [ `water`](#water)
-* [ `natural`](#natural)
-* [ `builtup`](#builtup)
-* [ `infrastructure`](#infrastructure)
-* [ `agricultural`](#agricultural)
-* [ `waterline`](#waterline)
-* [ `railways`](#railways)
-* [ `roads`](#roads)
-* [ `boundaries`](#boundaries)
-* [ `pois`](#pois)
-* [ `labels`](#labels)
-
 ### Fields
 
 All layers contain the following general fields:
 
-* `originalid`
-* `name`
-* `type`
+1. [ `originalid`](#originalid)
+2. [`name`](#name)
+3. [`type`](#type)
 
 And possibly contain the following fields:
 
-* `subtype`
-* `subsubtype`
+4. [`subtype`](#subtype)
+5. [`subsubtype`](#subsubtype)
 
-Not every layer has the same amount of subdevisions. All layers contain `type`, most also contain a `subtype` and some even contain a `subsubtype` when needed. 
+*Not every layer has the same amount of subdevisions. All layers contain `type`, most also contain a `subtype` and some even contain a `subsubtype` when needed.* 
 
-###### `originalid`
-
+###### `originalid` 
 The `originalid` contains the feature id from the original dataset. This can be the Natural Earth dataset, Top10NL, BGT or even OSM ID's. No transformation is done on this number. When the `originalid` is missing it means a custom geometric transformation (other than simplification) on the feature has occurred, like merging features or transformation from polygon to line. These new features can therefore not be mapped back to its original source.
 
 ###### `name`
-
 The Dutch name of the feature if provided by the source data. 
 
 ##### `type`
-
 The main type of the feature. First main sub-division of the data for cartographic purposes.
 
 ##### `subtype`
-
 This is a subdevision of the `type`. So more detail can be found when using the `subtypes`.
 
 ### Source Data 
-The Cartiqo data model is build from the following data sources: 
+
+Cartiqo is a new data model build from a combination of several datasets. With easy recognizable layer names and types. The model is designed to quickly style the data in a comprehensive way over all zoom levels from all source data. No knowledge from the source data is needed to understand the Cartiqo data model. 
+We choose the best combination of the data on each zoom level to provide a good and complete map of the Netherlands. Choices are a tradeoff between detailed data and fast simplified features to keep the tiles small and fast. 
+
+The following sources are used: 
 
 * Basis Registratie Grootschalige Topografie (BGT)
 * Basis Registratie Topografie (BRT)
@@ -154,8 +227,23 @@ Natural Earth data is downloaded form [the website](https://www.naturalearthdata
 
 CBS data form the [cbs website](https://www.cbs.nl/nl-nl/dossier/nederland-regionaal/geografische-data)
 
+In the following 2 chapters we will explain the data per layer and per zoom level. Also mentioning which source data is included. 
 
-### In depth description of data layers
+
+### Data Layers
+
+
+* [ `water`](#water)
+* [ `natural`](#natural)
+* [ `builtup`](#builtup)
+* [ `infrastructure`](#infrastructure)
+* [ `agricultural`](#agricultural)
+* [ `waterline`](#waterline)
+* [ `railways`](#railways)
+* [ `roads`](#roads)
+* [ `boundaries`](#boundaries)
+* [ `pois`](#pois)
+* [ `labels`](#labels)
 
 #### `water` (polygon)
 
@@ -312,5 +400,5 @@ One of:
 #### `labels` (point)
  {place,admin,water,nature,industrial}  
 
-### In depth description per zoom level
+### Data per Zoom Level
 
