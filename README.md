@@ -99,7 +99,7 @@ Cartiqo can easily be used in a Mapbox GL js map. Without the use of a Mapbox ac
 * https://ta.webmapper.nl/wm/styles/crafty.json
 * https://ta.webmapper.nl/wm/styles/data_lines.json
 
-### custom styles
+### Custom styles
 
 You can build your own custom style according to the [MapboxGL.js Styling specs](https://docs.mapbox.com/mapbox-gl-js/style-spec/)
 
@@ -201,7 +201,7 @@ This is a subdevision of the `type`. So more detail can be found when using the 
 
 ### Source Data 
 
-Cartiqo is a new data model build from a combination of several datasets. With easy recognizable layer names and types. The model is designed to quickly style the data in a comprehensive way over all zoom levels from all source data. No knowledge from the source data is needed to understand the Cartiqo data model. 
+Cartiqo is a new data model build from a combination of several datasets so it contains thematic data layers with recognizable names and types. The model is designed to quickly style the data in a comprehensive way over all zoom levels from all source data. No knowledge from the source data is needed to understand the Cartiqo data model. 
 We choose the best combination of the data on each zoom level to provide a good and complete map of the Netherlands. Choices are a tradeoff between detailed data and fast simplified features to keep the tiles small and fast. 
 
 The following sources are used: 
@@ -228,10 +228,9 @@ Natural Earth data is downloaded form [the website](https://www.naturalearthdata
 CBS data form the [cbs website](https://www.cbs.nl/nl-nl/dossier/nederland-regionaal/geografische-data)
 
 In the following 2 chapters we will explain the data per layer and per zoom level. Also mentioning which source data is included. 
+This is useful for writing a map style and allows for alternative use of the data stack. 
 
-
-### Data Layers
-
+### Thematic Data Layers
 
 * [ `water`](#water)
 * [ `natural`](#natural)
@@ -247,7 +246,7 @@ In the following 2 chapters we will explain the data per layer and per zoom leve
 
 #### `water` (polygon)
 
-**`water`** contains all water area polygons like oceans, sea, lakes and rivers. On lower zoom levels it contains all oceans from the Natural Earth dataset. At higher zoom levels it contains all water bodies from The Netherlands. Including the Wadden.  
+**`water`** contains all water area polygons like oceans, sea, lakes and rivers. On lower zoom levels it contains all oceans from the Natural Earth dataset. At higher zoom levels it contains all water bodies from The Netherlands. Including the Wadden.
 
 ##### Fields
 
@@ -267,12 +266,33 @@ One of:
 * `lake`
 * `water_way`
 
+
+#### `waterline` (line)
+
+Water streams in the Netherlands are sometimes drawn as a Polygon and sometimes as a Line. Therefore a separate layer for water lines is provided. **Note!** a water body or stream is not defined by the geometry. Water streams can be drawn as a line or a polygon. Water bodies are often given as polygons but also larger rivers are given as polygons. No explicit reasons can be found for this difference. Mostly water drawn as lines are smaller water streams like ditches between fields.
+
+##### Fields
+
+* `originalid`
+* `name`
+* `type`
+
+###### `type`
+
+The type of a water line is the width given by the source data. 
+
+* 3m
+* 6m
+* 12m
+* 50m
+* 125m
+* wide
+
 #### `natural` (polygon)
 
 **`natural`** contains all nature polygons like nature areas, grass fields and forest areas. It describes the physical material of the land surface. 
 
 Together with the layers **`agriculture`**, **`infrastructure`** and **`builtup`** it covers the total surface of the Netherlands from zoom level 13 and higher. 
-
 
 ##### Fields
 
@@ -316,6 +336,8 @@ The subtype of the feature describes the type in even more detail and can be use
 
 The **`builtup`** layer contains all the urban areas and buildings. On lower zoom levels a city is represented as an urban area and on higher zoom levels the areas will be split up into building blocks and later by buildings and even more detail, entrances, walls and covers. 
 
+Together with the layers **`natural`**, **`agriculture`** and **`infrastructure`** it covers the total surface of the Netherlands from zoom level 13 and higher. 
+
 ##### Fields
 
 * `originalid`
@@ -339,6 +361,7 @@ One of:
 
 All physical areas human-made and not natural or vegetation covered. Mostly asphalt or stone coverages and found inside urban areas. 
 
+Together with the layers **`agriculture`**, **`natural`** and **`builtup`** it covers the total surface of the Netherlands from zoom level 13 and higher.
 
 ##### Fields
 
@@ -365,6 +388,10 @@ One of:
 
 #### `agricultural` (polygon)
 
+All fields for agricultural purposes, including pastures, greenhouses, arboriculture and fallow.  
+
+
+Together with the layers **`natural`**, **`infrastructure`** and **`builtup`** it covers the total surface of the Netherlands from zoom level 13 and higher.
 
 ##### Fields
 
@@ -385,20 +412,140 @@ One of:
   * `greenhouse`
   * `fallow`
 
-#### `waterline` (line)
-
- {3m,6m,12m,50m,125m,wide}
 
 #### `railways` (line)
- {rail,tram,metro,industrial,touristic,light_rail} 
+
+##### Fields
+
+* `originalid`
+* `name`
+* `type`
+* `tunnel`
+
+###### `type`
+
+* `rail`
+* `tram`
+* `metro`
+* `industrial`
+* `touristic`
+* `light_rail`
+
+###### `tunnel`
+
+If line feature is tunnel or not:  `true` `false`
+
 #### `roads` (line)
-{highway,motorway,main,secondary,local,bike,path} 
+
+##### Fields
+
+* `originalid`
+* `name`
+* `type`
+* `tunnel`
+* `road_number`
+* `relative_height`
+
+###### `type`
+
+* `highway`
+* `motorway`
+* `main`
+* `secondary`
+* `local`
+* `bike`
+* `path`
+
+###### `road_number`
+
+Ducht Road number classification number if available. Like A roads and N road numbers. Can be used for double labeling. 
+ 
+
 #### `boundaries` (line)
- {country,province,municipality} 
+
+##### Fields
+
+* `originalid`
+* `name`
+* `type`
+* `subtype`
+
+###### `type`
+
+* `country`
+* `province`
+* `municipality`
+
+
 #### `pois` (point)
- {food_drink,public_building,public_transport} 
+
+##### Fields
+
+* `originalid`
+* `name`
+* `type`
+* `subtype`
+
+###### `type`
+
+* `food_drink`
+* `public_building`
+* `public_transport` 
+
 #### `labels` (point)
- {place,admin,water,nature,industrial}  
+
+##### Fields
+
+* `originalid`
+* `name`
+* `type`
+* `subtype`
+* `subsubtype`
+* `hierarchy`
+* `rotation`
+
+###### `type`
+
+* `place` 
+
+Place names of inhabited places like cities, large towns, small towns and hamlets in the Netherlands. Also including urban district names as used by inhabitants (different form administrative districts).
+
+* `admin` 
+
+Administrative names from administrative areas according to the CBS. Placed as a point inside the area. 
+
+* `water`
+
+Relavant water names of physical areas.  (not harbors)
+
+* `nature`
+
+Relevant nature area names. Only large nature areas. (not gardens and dog parks)
+
+
+###### `subtype` & `subsubtypes
+
+* `place`
+    * `urban_district`
+    * `settlement`
+* `admin` 
+    * `country`
+        * `foreign`
+        * `domestic`
+    * `province`
+    * `municipality`
+    * `district`
+    * `neighborhood`
+* `water`
+* `nature`
+
+###### `hierarchy`
+
+Place label hierarchy. See [document met overzicht]( )
+
+###### `rotation`
+
+Rotation of address numbers in degrees. Only for `type == address`. 
 
 ### Data per Zoom Level
 
