@@ -101,10 +101,18 @@ A quick overview:
 
 ### Fields
 
-All layers contain the following general fields, and will therefore be described here only once:
+All layers contain the following general fields:
 
 * `originalid`
 * `name`
+* `type`
+
+And possibly contain the following fields:
+
+* `subtype`
+* `subsubtype`
+
+Not every layer has the same amount of subdevisions. All layers contain `type`, most also contain a `subtype` and some even contain a `subsubtype` when needed. 
 
 ###### `originalid`
 
@@ -114,6 +122,40 @@ The `originalid` contains the feature id from the original dataset. This can be 
 
 The Dutch name of the feature if provided by the source data. 
 
+##### `type`
+
+The main type of the feature. First main sub-division of the data for cartographic purposes.
+
+##### `subtype`
+
+This is a subdevision of the `type`. So more detail can be found when using the `subtypes`.
+
+### Source Data 
+The Cartiqo data model is build from the following data sources: 
+
+* Basis Registratie Grootschalige Topografie (BGT)
+* Basis Registratie Topografie (BRT)
+    * Top10NL
+    * Top50NL
+    * Top100NL
+    * Top250NL
+    * Top500NL
+    * Top1000NL
+* Basis Registratie Adressen en Gebouwen (BAG)
+* CBS 
+* Natural Earth data
+* Open Street Map (OSM)
+
+The BGT, BRT and BAG datasets are imported with [NLExtract](https://nlextract.nl/).
+
+The OSM data is imported with the help of the [OpenMaptiles](https://github.com/openmaptiles/openmaptiles/) stack and schema. So the OSM data is already preprocessed and can be handled more easy and quicker.  
+
+Natural Earth data is downloaded form [the website](https://www.naturalearthdata.com/). All large, medium and small scale data. 
+
+CBS data form the [cbs website](https://www.cbs.nl/nl-nl/dossier/nederland-regionaal/geografische-data)
+
+
+### In depth description of data layers
 
 #### `water` (polygon)
 
@@ -270,7 +312,5 @@ One of:
 #### `labels` (point)
  {place,admin,water,nature,industrial}  
 
-### Zoom levels
-
-### Source Data
+### In depth description per zoom level
 
