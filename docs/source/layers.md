@@ -1,2 +1,0 @@
-Layers in Cartiqo
-=================
