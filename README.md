@@ -255,7 +255,6 @@ This is useful for writing a map style and allows for alternative use of the dat
 * `originalid`
 * `name`
 * `type`
-* `subtype`
 
 ###### `type`
 
@@ -289,7 +288,7 @@ The type of a water line is the width given by the source data.
 * 12m
 * 50m
 * 125m
-* wide
+
 
 ------------------------------------------------------
 
@@ -352,22 +351,38 @@ Together with the layers **`natural`**, **`agriculture`** and **`infrastructure`
 * `type`
 * `subtype`
 
-###### `type`
+###### `type` & `subtype`
 
 The main type of the feature. 
 
 One of:
 
 * `area`
-* `courtyard`
+    * ``
+    * `courtyard`
+    * `industrial`
+    * `residential`
+    * `graveyard`
 * `building`
+    * `` 
+    * `industry`
+    * `main`
+    * `barn`
+    * `entrance`
+    * `waterbassin`
+    * `cover`
+    * `pitch`
+    * `berth`
 * `wall`
+
 
 ------------------------------------------------------
 
 #### `infrastructure` (polygon)
 
-All physical areas human-made and not natural or vegetation covered. Mostly asphalt or stone coverages and found inside urban areas. 
+This is NOT the road infrastructure. But physical areas, human-made which are not natural or vegetation covered.  
+
+Mostly asphalt or stone coverages, often found inside urban areas. Areas supporting the road infrastructure. 
 
 Together with the layers **`agriculture`**, **`natural`** and **`builtup`** it covers the total surface of the Netherlands from zoom level 13 and higher.
 
@@ -378,15 +393,27 @@ Together with the layers **`agriculture`**, **`natural`** and **`builtup`** it c
 * `type`
 * `subtype`
 
-###### `type`
+###### `type` & `subtype`
 
 The main type of the feature. 
 
 One of:
 
 * `parking`
-* `road `
+* `road`
+    * `motorway`
+    * `transit`
+    * `bike`
+    * `driveway`
+    * `bridle_Way`
+    * `crossing`
+    * `secondary`
+    * `highway`
+    * `local`
+`   * `path`
 * `railway`
+    * `track_surface`
+    * `platform`
 * `jetty`
 * `tunnel`
 * `bridge`
@@ -443,7 +470,7 @@ One of:
 
 ###### `tunnel`
 
-If line feature is tunnel or not:  `true` `false`
+If line feature is tunnel or not:  `1` `2`
 
 ------------------------------------------------------
 
@@ -472,7 +499,7 @@ If line feature is tunnel or not:  `true` `false`
 
 ###### `tunnel`
 
-If line feature is tunnel or not:  `true` `false`
+If line feature is tunnel or not:  `1` `0`
 
 ###### `road_number`
 
@@ -505,6 +532,8 @@ Ducht Road number classification number if available. Like A roads and N road nu
 ------------------------------------------------------
 
 #### `pois` (point)
+
+Points of interest which (usually) are visualized with an icon. Human-made functionality or human agreements that define a distinct place of reference. 
 
 ##### Fields
 
@@ -561,9 +590,24 @@ Commercial shops other then food and drink.
 
 The `subsubtype` of a POI feature is the original description from source data the POI is derived from. (mainly OSM) 
 
+
+###### `hierarchy`
+
+Top10NL data is considered priority. Then Polygon sources and Larger areas. Then POINTS
+
+Most features must conatain a name to be considered in the data. Ecxept for the Parking places. Which are hierarical ordered according to having a name or not. 
+
+Parks are also hierarchical ordered to name and area size. 
+
+See [POIS_desicions.odt] for a complete overview of the desicions made. 
+
 ------------------------------------------------------
 
 #### `labels` (point)
+
+Names of areas, usually displayed only as a label (not an icon). Larger areas with natural names of undefined borders and administratieve areas. 
+
+Also including address numbers at zoom level 16. 
 
 ##### Fields
 
@@ -593,6 +637,11 @@ Relavant water names of physical areas.  (not harbors)
 
 Relevant nature area names. Only large nature areas. (not gardens and dog parks)
 
+* `address`
+
+Address numbers and letters, available at zoom level 16. 
+
+
 ###### `subtype` & `subsubtypes
 
 * `place`
@@ -608,6 +657,7 @@ Relevant nature area names. Only large nature areas. (not gardens and dog parks)
     * `neighborhood`
 * `water`
 * `nature`
+* `address`
 
 ###### `hierarchy`
 
