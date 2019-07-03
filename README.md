@@ -1,6 +1,6 @@
 # Cartiqo Technical Specs BETA release
 
-Cartiqo is a Vector Tile product based on open source geodate of the Netherlands. It provides a full and detailed map of the Netherlands customizable to your own likes. 
+Cartiqo is a Vector Tile product based on open source geo data of the Netherlands. It provides a full and detailed map of the Netherlands customizable to your own likes. 
 
 ## Introduction
 
@@ -26,9 +26,9 @@ Please reference to Cartiqo in the attribution:
     "attribution": "Tiles &copy; <a href='https://cartiqo.nl' target='_blank' title'Powered by Cartiqo'>Cartiqo</a>. Map data: &copy; <a href='https://cbs.nl' target='_blank'>CBS</a>  &copy; <a href='https://kadaster.nl' target='_blank'>Kadaster</a> &copy; <a href='https://osm.org/copyright'>OpenStreetMap</a>.<br/>Cartography: &copy; <a href='https://webmapper.net' target='_blank'>Webmapper</a>."
 
 
-### Example with [MapboxGL.js](https://docs.mapbox.com/mapbox-gl-js/overview/)
+### Example with [Mapbox-GL.js](https://docs.mapbox.com/mapbox-gl-js/overview/)
 
-Cartiqo can easily be used in a Mapbox GL js map. Without the use of a Mapbox access token! 
+Cartiqo can easily be used in a Mapbox-GL.js map. Without the use of a Mapbox access token! 
 
 ``` html
 <!DOCTYPE html>
@@ -60,7 +60,7 @@ Cartiqo can easily be used in a Mapbox GL js map. Without the use of a Mapbox ac
 </html>
 ```
 
-### Example with [Leaflet.js Mapbox Gl Plugin](https://github.com/mapbox/mapbox-gl-leaflet)
+### Example with [Leaflet.js Mapbox-GL.js Plugin](https://github.com/mapbox/mapbox-gl-leaflet)
 
 ```html
 <!DOCTYPE html>
@@ -101,7 +101,7 @@ Cartiqo can easily be used in a Mapbox GL js map. Without the use of a Mapbox ac
 
 ### Custom styles
 
-You can build your own custom style according to the [MapboxGL.js Styling specs](https://docs.mapbox.com/mapbox-gl-js/style-spec/)
+You can build your own custom style according to the [Mapbox-GL.js Styling specs](https://docs.mapbox.com/mapbox-gl-js/style-spec/)
 
 Example :
 
@@ -157,15 +157,15 @@ For Cartiqo we have some Fonts available at `https://ta.webmapper.nl/wm/glyphs/{
 
 ### Philosophy
 
-The Cartiqo vector tiles are build with the aim to have as less as possible styling rules to create a clear map. Data rearrangement desisions are always made with a cartographic goal in mind. 
+The Cartiqo vector tiles are build with the aim to have as less as possible styling rules to create a clear map. Data rearrangement decisions are always made with a cartographic goal in mind. 
 
 In theory it will be possible to style a map by simply assigning one color per layer and you will be done. For example, blue for water, green for nature and grey for built-up areas. This would already give you a pretty good map. 
 
 To add more cartographic detail to the map a distinction can be made by the `type` in the layer. The `type` is the first main division that can be given to a layer which is interesting for cartographic reasons. Like natural is divided in high vegetation and low vegetation, a main distinction for the use of dark green and lighter shades of green.
 
-Even more detail can be found when using the `subtypes`. This is a subdevision of the `type`.
+Even more detail can be found when using the `subtypes`. This is a subdivision of the `type`.
 
-Not every layer has the same amount of subdevisions. All layers contain `type`, most also contain a `subtype` and some even contain a `subsubtype` when needed. 
+Not every layer has the same amount of subdivisions. All layers contain `type`, most also contain a `subtype` and some even contain a `subsubtype` when needed. 
 
 ### Layers
 A quick overview:
@@ -188,7 +188,7 @@ And possibly contain the following fields:
 *Not every layer has the same amount of subdevisions. All layers contain `type`, most also contain a `subtype` and some even contain a `subsubtype` when needed.* 
 
 ###### `originalid` 
-The `originalid` contains the feature id from the original dataset. This can be the Natural Earth dataset, Top10NL, BGT or even OSM ID's. No transformation is done on this number. When the `originalid` is missing it means a custom geometric transformation (other than simplification) on the feature has occurred, like merging features or transformation from polygon to line. These new features can therefore not be mapped back to its original source.
+The `originalid` contains the feature id from the original data set. This can be the Natural Earth data set, Top10NL, BGT or even OSM ID's. No transformation is done on this number. When the `originalid` is missing it means a custom geometric transformation (other than simplification) on the feature has occurred, like merging features or transformation from polygon to line. These new features can therefore not be mapped back to its original source.
 
 ###### `name`
 The Dutch name of the feature if provided by the source data. 
@@ -201,9 +201,9 @@ This is a subdevision of the `type`. So more detail can be found when using the 
 
 ### Source Data 
 
-Cartiqo is a new data model build from a combination of several datasets and transformed into homogeneous thematic data layers with recognizable names and types. The model is designed to quickly style the data in a comprehensive way covering all zoom levels. No knowledge from the source data sets is needed to understand the Cartiqo data model. 
+Cartiqo is a new data model build from a combination of several data sets and transformed into homogeneous thematic data layers with recognizable names and types. The model is designed to quickly style the data in a comprehensive way covering all zoom levels. No knowledge from the source data sets is needed to understand the Cartiqo data model. 
 
-The combination of datasets and layers on each zoom level is chosen to our best opinion to provide a good and complete map of the Netherlands. Sometimes these choices are a tradeoff between detailed data or simplified features, to keep the tiles small and fast. 
+The combination of data sets and layers on each zoom level is chosen to our best opinion to provide a good and complete map of the Netherlands. Sometimes these choices are a tradeoff between detailed data or simplified features, to keep the tiles small and fast. 
 
 The following sources are used: 
 
@@ -251,7 +251,7 @@ This is the vector tile schema describing how the thematic data layers are organ
 
 #### `water` (polygon)
 
-**`water`** contains all water area polygons like oceans, sea, lakes and rivers. On lower zoom levels it contains all oceans from the Natural Earth dataset. At higher zoom levels it contains all water bodies from The Netherlands. Including the Wadden.
+**`water`** contains all water area polygons like oceans, sea, lakes and rivers. On lower zoom levels it contains all oceans from the Natural Earth data set. At higher zoom levels it contains all water bodies from The Netherlands. Including the Wadden.
 
 ##### Fields
 
@@ -274,7 +274,7 @@ One of:
 
 #### `waterline` (line)
 
-Water streams in Dutch geodata sources are sometimes drawn as a Polygon and sometimes as a Line. Therefore a separate layer for water lines is provided. **Note!** a water body or stream is not defined by the geometry. Water streams can be drawn as a line or a polygon. Water bodies are often given as polygons but also larger rivers are given as polygons. No explicit reasons can be found for this difference. Mostly water drawn as lines are smaller water streams like ditches between fields.
+Water streams in Dutch geo data sources are sometimes drawn as a Polygon and sometimes as a Line. Therefore a separate layer for water lines is provided. **Note!** a water body or stream is not defined by the geometry. Water streams can be drawn as a line or a polygon. Water bodies are often given as polygons but also larger rivers are given as polygons. No explicit reasons can be found for this difference. Mostly water drawn as lines are smaller water streams like ditches between fields.
 
 ##### Fields
 
@@ -611,7 +611,7 @@ See [POIs_decision.ods](https://github.com/webmapper/cartiqo-documentation/blob/
 
 #### `labels` (point)
 
-Names of areas, usually displayed only as a label (not an icon). Larger areas with natural names of undefined borders and administratieve areas. 
+Names of areas, usually displayed only as a label (not an icon). Larger areas with natural names of undefined borders and administrative areas. 
 
 Also including address numbers at zoom level 16. 
 
@@ -637,7 +637,7 @@ Administrative names from administrative areas according to the CBS. Placed as a
 
 * `water`
 
-Relavant water names of physical areas.  (not harbors)
+Relevant water names of physical areas.  (not harbors)
 
 * `nature`
 
@@ -712,8 +712,8 @@ A quick description of the most important appearances of data per zoom level:
 
 #### Zoom level 13
 
-- Agricultural pasture appears. Covering all the surface of the Neterlands. ! Note this is a big change in how the map looks !
-- Builtup buildings. 
+- Agricultural pasture appears. Covering all the surface of the Netherlands. ! Note this is a big change in how the map looks !
+- Built up buildings. 
 - Almost all infrastructure areas. 
 - Local roads
 
