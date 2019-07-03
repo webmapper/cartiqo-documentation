@@ -677,3 +677,57 @@ Rotation of address numbers in degrees. Only for `type == address`.
 
 ### Data per Zoom Level
 
+For a detailed overview of layers and types per zoom level see the document [zoomlevel_overview.ods](https://github.com/webmapper/cartiqo-documentation/blob/master/zoomlevel_overview.ods)
+
+A quick description of the most important appearances of data per zoom level:
+
+#### Zoom level 0 - 4
+
+World wide water bodies
+
+#### Zoom level 5 - 8
+
+World wide water bodies and country boundaries. Also world wide country names in labels. 
+Built up areas, natural areas and water areas in the Netherlands
+Highways and main road. 
+Largest cities labels of the Netherlands. 
+
+#### Zoom level 9 
+
+Agriculrural areas are added.  
+Municipality boundaries. 
+water labels.
+
+#### Zoom level 10 - 11
+
+nature and industrial labels.
+Railways for train.
+Main roads.
+Infrastructure railway areas. 
+
+#### Zoom level 12
+
+All POIS are added. 
+Secondary roads. 
+
+#### Zoom level 13
+
+Agricultural pasture appears. Covering all the surface of the Neterlands. ! Note this is a big change in how the map looks !
+
+Builtup buildings. 
+
+Almost all infrastructure areas. 
+Local roads
+
+#### Zoom level 14
+
+bike and path roads are added. 
+
+#### Zoom level 15 
+All railways, tram, metro etc included.
+
+#### Zoom level 16
+
+Individual buildings
+walls 
+Infrastructure areas of tunnels and bridges. 
