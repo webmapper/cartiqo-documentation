@@ -4,7 +4,7 @@ Cartiqo is a Vector Tile product based on open source geo data of the Netherland
 
 ## Introduction
 
-Have a look at [cartiqo.nl](cartiqo.nl). 
+Have a look at [cartiqo.nl](https://cartiqo.nl/). 
 
 ## How to display a Cartiqo Map
 
@@ -23,7 +23,7 @@ Or you can directly get the pbf tiles at:
 
 Please reference to Cartiqo in the attribution:
 
-    "attribution": "Tiles &copy; <a href='https://cartiqo.nl' target='_blank' title'Powered by Cartiqo'>Cartiqo</a>. Map data: &copy; <a href='https://cbs.nl' target='_blank'>CBS</a>  &copy; <a href='https://kadaster.nl' target='_blank'>Kadaster</a> &copy; <a href='https://osm.org/copyright'>OpenStreetMap</a>.<br/>Cartography: &copy; <a href='https://webmapper.net' target='_blank'>Webmapper</a>."
+    "attribution": "Tiles &copy; <a href='https://cartiqo.nl' target='_blank' title='Powered by Cartiqo'>Cartiqo</a>. Map data: &copy; <a href='https://cbs.nl' target='_blank'>CBS</a>  &copy; <a href='https://kadaster.nl' target='_blank'>Kadaster</a> &copy; <a href='https://osm.org/copyright'>OpenStreetMap</a>.<br/>Cartography: &copy; <a href='https://webmapper.net' target='_blank'>Webmapper</a>."
 
 
 ### Example with [Mapbox-GL.js](https://docs.mapbox.com/mapbox-gl-js/overview/)
@@ -707,7 +707,7 @@ A quick description of the most important appearances of data per zoom level:
 
 #### Zoom level 12
 
-- All POIS are present 
+- All POIs are present 
 - Secondary roads
 
 #### Zoom level 13
