@@ -201,23 +201,24 @@ This is a subdevision of the `type`. So more detail can be found when using the 
 
 ### Source Data 
 
-Cartiqo is a new data model build from a combination of several datasets so it contains thematic data layers with recognizable names and types. The model is designed to quickly style the data in a comprehensive way over all zoom levels from all source data. No knowledge from the source data is needed to understand the Cartiqo data model. 
-We choose the best combination of the data on each zoom level to provide a good and complete map of the Netherlands. Choices are a tradeoff between detailed data and fast simplified features to keep the tiles small and fast. 
+Cartiqo is a new data model build from a combination of several datasets and transformed into homogeneous thematic data layers with recognizable names and types. The model is designed to quickly style the data in a comprehensive way covering all zoom levels. No knowledge from the source data sets is needed to understand the Cartiqo data model. 
+
+The combination of datasets and layers on each zoom level is chosen to our best opinion to provide a good and complete map of the Netherlands. Sometimes these choices are a tradeoff between detailed data or simplified features, to keep the tiles small and fast. 
 
 The following sources are used: 
 
-* Basis Registratie Grootschalige Topografie (BGT)
-* Basis Registratie Topografie (BRT)
+* [Basis Registratie Grootschalige Topografie (BGT)](https://www.geobasisregistraties.nl/basisregistraties/grootschalige-topografie)
+* [Basis Registratie Topografie (BRT)](https://www.geobasisregistraties.nl/basisregistraties/topografie)
     * Top10NL
     * Top50NL
     * Top100NL
     * Top250NL
     * Top500NL
     * Top1000NL
-* Basis Registratie Adressen en Gebouwen (BAG)
-* CBS 
-* Natural Earth data
-* Open Street Map (OSM)
+* [Basis Registratie Adressen en Gebouwen (BAG)](https://www.geobasisregistraties.nl/basisregistraties/adressen-en-gebouwen)
+* [CBS](https://www.cbs.nl/nl-nl/reeksen/geografische-data) 
+* [Natural Earth data](https://www.naturalearthdata.com/)
+* [Open Street Map (OSM)](https://www.openstreetmap.org/)
 
 The BGT, BRT and BAG datasets are imported with [NLExtract](https://nlextract.nl/).
 
@@ -231,6 +232,8 @@ In the following 2 chapters we will explain the data per layer and per zoom leve
 This is useful for writing a map style and allows for alternative use of the data stack. 
 
 ### Thematic Data Layers
+
+This is the vector tile schema describing how the thematic data layers are organized and which attributes and attributes values they have. This is useful for writing a map style.
 
 * [ `water`](#water)
 * [ `natural`](#natural)
@@ -271,7 +274,7 @@ One of:
 
 #### `waterline` (line)
 
-Water streams in the Netherlands are sometimes drawn as a Polygon and sometimes as a Line. Therefore a separate layer for water lines is provided. **Note!** a water body or stream is not defined by the geometry. Water streams can be drawn as a line or a polygon. Water bodies are often given as polygons but also larger rivers are given as polygons. No explicit reasons can be found for this difference. Mostly water drawn as lines are smaller water streams like ditches between fields.
+Water streams in Dutch geodata sources are sometimes drawn as a Polygon and sometimes as a Line. Therefore a separate layer for water lines is provided. **Note!** a water body or stream is not defined by the geometry. Water streams can be drawn as a line or a polygon. Water bodies are often given as polygons but also larger rivers are given as polygons. No explicit reasons can be found for this difference. Mostly water drawn as lines are smaller water streams like ditches between fields.
 
 ##### Fields
 
@@ -503,11 +506,13 @@ If line feature is tunnel or not:  `1` `0`
 
 ###### `road_number`
 
-Ducht Road number classification number if available. Like A roads and N road numbers. Can be used for double labeling. 
+Dutch road number classification if available. Like A roads and N road numbers. These roads often contain a name and a number, so this can be used for double labeling. 
  
 ------------------------------------------------------
 
 #### `boundaries` (line)
+
+Administrative boundaries of countries, provinces and municipalities. Will be expanded with regions and neighborhoods in the next editions. 
 
 ##### Fields
 
@@ -533,7 +538,7 @@ Ducht Road number classification number if available. Like A roads and N road nu
 
 #### `pois` (point)
 
-Points of interest which (usually) are visualized with an icon. Human-made functionality or human agreements that define a distinct place of reference. 
+Points of interest which usually are visualized with an icon. Human-made functionality or human agreements that define a distinct place of reference. 
 
 ##### Fields
 
@@ -592,14 +597,15 @@ The `subsubtype` of a POI feature is the original description from source data t
 
 
 ###### `hierarchy`
+The label hierarchy or size/importance per POI category.
 
-Top10NL data is considered priority. Then Polygon sources and Larger areas. Then POINTS
+Top10NL data is considered priority. Then Polygon sources and larger areas. Then POINTS
 
-Most features must conatain a name to be considered in the data. Ecxept for the Parking places. Which are hierarical ordered according to having a name or not. 
+Most features must contain a name to be considered in the data. Except for the Parking places. Which are hierarchical ordered according to having a name or not. 
 
 Parks are also hierarchical ordered to name and area size. 
 
-See [POIS_desicions.odt] for a complete overview of the desicions made. 
+See [POIs_decision.ods](https://github.com/webmapper/cartiqo-documentation/blob/master/POIs_decision.ods) for a complete overview of the decisions made. 
 
 ------------------------------------------------------
 
@@ -661,7 +667,9 @@ Address numbers and letters, available at zoom level 16.
 
 ###### `hierarchy`
 
-Place label hierarchy. See [document met overzicht]( )
+Place label hierarchy. Based on capitals, population size, category and geometry type. e.g. polygons have a higher hierarchy then points. 
+
+For a detailed overview see the document [Label_hierarchy.ods](https://github.com/webmapper/cartiqo-documentation/blob/master/Label_hierarchy.ods)
 
 ###### `rotation`
 
