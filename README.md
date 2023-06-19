@@ -1,149 +1,8 @@
-# Cartiqo Technical Specs BETA release
+# Cartiqo Technical Specs
 
 Cartiqo is a Vector Tile product based on open source geo data of the Netherlands. It provides a full and detailed map of the Netherlands customizable to your own likes. 
 
-## Introduction
-
 Have a look at [cartiqo.nl](https://cartiqo.nl/). 
-
-## How to display a Cartiqo Map
-
-### Endpoint
-
-There is a tile JSON available pointing to the tile sources, having the right attribution and describing the available features. *according to the [TileJSON spec](https://github.com/mapbox/tilejson-spec)*
- 
-    https://ta.webmapper.nl/wm/styles/tile.json
-
-Or you can directly get the pbf tiles at: 
-
-    "https://ta.webmapper.nl/wm/cartiqo/{z}/{x}/{y}"
-    "https://tb.webmapper.nl/wm/cartiqo/{z}/{x}/{y}"
-    "https://tc.webmapper.nl/wm/cartiqo/{z}/{x}/{y}" 
-
-
-Please reference to Cartiqo in the attribution:
-
-    "attribution": "Tiles &copy; <a href='https://cartiqo.nl' target='_blank' title='Powered by Cartiqo'>Cartiqo</a>. Map data: &copy; <a href='https://cbs.nl' target='_blank'>CBS</a>  &copy; <a href='https://kadaster.nl' target='_blank'>Kadaster</a> &copy; <a href='https://osm.org/copyright'>OpenStreetMap</a>.<br/>Cartography: &copy; <a href='https://webmapper.net' target='_blank'>Webmapper</a>."
-
-
-### Example with [Mapbox-GL.js](https://docs.mapbox.com/mapbox-gl-js/overview/)
-
-Cartiqo can easily be used in a Mapbox-GL.js map. Without the use of a Mapbox access token! 
-
-``` html
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset='utf-8' />
-    <title>Cartiqo Topo style map example</title>
-    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
-    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css' rel='stylesheet' />
-    <style>
-        body { margin:0; padding:0; }
-        #map { position:absolute; top:0; bottom:0; width:100%; }
-    </style>
-</head>
-<body>
-    <div id='map'></div>
-    <script>
-        var map = new mapboxgl.Map({
-            container: 'map',
-            style: 'https://ta.webmapper.nl/wm/styles/topography.json',
-            zoom: 14.5,
-            pitch: 60,
-            bearing: 17.6,
-            center: [5.60482, 51.76409]
-        });
-    </script>
-</body>
-</html>
-```
-
-### Example with [Leaflet.js Mapbox-GL.js Plugin](https://github.com/mapbox/mapbox-gl-leaflet)
-
-```html
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset='utf-8' />
-    <title>Cartiqo Topo style map example</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.js"></script>
-    <script src="https://cdn.maptiler.com/mapbox-gl-js/v0.53.0/mapbox-gl.js"></script>
-    <script src="https://cdn.maptiler.com/mapbox-gl-leaflet/latest/leaflet-mapbox-gl.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.css" />
-    <link rel="stylesheet" href="https://cdn.maptiler.com/mapbox-gl-js/v0.53.0/mapbox-gl.css" />
-    <style>
-        body { margin:0; padding:0; }
-        #map { position:absolute; top:0; bottom:0; width:100%; }
-    </style>
-  </head>
-  <body>
-    <div id="map"></div>
-    <script>
-      var map = L.map('map').setView([ 52.02624, 5.17197], 11);
-      var gl = L.mapboxGL({
-        accessToken: 'not-needed',
-        style: 'https://ta.webmapper.nl/wm/styles/topography.json'
-      }).addTo(map);
-    </script>
-  </body>
-</html>
-```
-
-## Styling a Cartiqo Map
-
-### Available styles:
-
-* https://ta.webmapper.nl/wm/styles/topography.json
-* https://ta.webmapper.nl/wm/styles/crafty.json
-* https://ta.webmapper.nl/wm/styles/data_lines.json
-
-### Custom styles
-
-You can build your own custom style according to the [Mapbox-GL.js Styling specs](https://docs.mapbox.com/mapbox-gl-js/style-spec/)
-
-Example :
-
-```js
-{
-    "version": 8,
-    "name": "Example",
-    "glyphs": "https://ta.webmapper.nl/wm/glyphs/{fontstack}/{range}.pbf",
-    "sprite": "https://ta.webmapper.nl/wm/sprite",
-    "sources": {
-        "cartiqo": {
-            "type": "vector",
-            "url": "https://ta.webmapper.nl/wm/styles/tile.json"
-        }
-    },
-    "layers": [
-        {
-            "id": "water",
-            "source":"cartiqo",
-            "source-layer":"water",
-            "type": "fill",
-            "paint": {
-                "fill-color": "#6d87a0"
-            }
-        }
-    ]
-}
-```
-
-### Glyphs
-
-For Cartiqo we have some Fonts available at `https://ta.webmapper.nl/wm/glyphs/{fontstack}/{range}.pbf`
-
-* `ArbutusSlab`
-* `Comfortaa`
-* `DosisLight`
-* `Giraffey`
-* `Lato`
-* `LatoSemi`
-* `Open Sans Regular`
-* `RalewayBold`
-
 
 ## Vector Tile Contents
 
@@ -154,7 +13,6 @@ For Cartiqo we have some Fonts available at `https://ta.webmapper.nl/wm/glyphs/{
 5. [In depth description of data layers](#Data-Layers)
 6. [In depth description per zoom level](#Data-per-Zoom-Level)
 
-
 ### Philosophy
 
 The Cartiqo vector tiles are build with the aim to have as less as possible styling rules to create a clear map. Data rearrangement decisions are always made with a cartographic goal in mind. 
@@ -164,8 +22,6 @@ In theory it will be possible to style a map by simply assigning one color per l
 To add more cartographic detail to the map a distinction can be made by the `type` in the layer. The `type` is the first main division that can be given to a layer which is interesting for cartographic reasons. Like natural is divided in high vegetation and low vegetation, a main distinction for the use of dark green and lighter shades of green.
 
 Even more detail can be found when using the `subtypes`. This is a subdivision of the `type`.
-
-Not every layer has the same amount of subdivisions. All layers contain `type`, most also contain a `subtype` and some even contain a `subsubtype` when needed. 
 
 ### Layers
 A quick overview:
@@ -201,7 +57,7 @@ This is a subdevision of the `type`. So more detail can be found when using the 
 
 ### Source Data 
 
-Cartiqo is a new data model build from a combination of several data sets and transformed into homogeneous thematic data layers with recognizable names and types. The model is designed to quickly style the data in a comprehensive way covering all zoom levels. No knowledge from the source data sets is needed to understand the Cartiqo data model. 
+Cartiqo is a data model build from a combination of several data sets and transformed into homogeneous thematic data layers with recognizable names and types. The model is designed to quickly style the data in a comprehensive way covering all zoom levels. No knowledge from the source data sets is needed to understand the Cartiqo data model. 
 
 The combination of data sets and layers on each zoom level is chosen to our best opinion to provide a good and complete map of the Netherlands. Sometimes these choices are a tradeoff between detailed data or simplified features, to keep the tiles small and fast. 
 
