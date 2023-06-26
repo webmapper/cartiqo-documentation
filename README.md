@@ -26,7 +26,7 @@ Even more detail can be found when using the `subtypes`. This is a subdivision o
 ### Layers
 A quick overview:
 
-![img](./img/cartiqo_schema.png)
+![img](cartiqo_schema.png)
 
 ### Fields
 
