@@ -4,6 +4,8 @@ Cartiqo is a Vector Tile product based on open source geo data of the Netherland
 
 Have a look at [cartiqo.nl](https://cartiqo.nl/). 
 
+Cartiqo is hosted at our partner [Maptiler](https://cloud.maptiler.com/tiles/nl-cartiqo/).
+
 ## Vector Tile Contents
 
 1. [Philosophy](#Philosophy)
@@ -32,7 +34,7 @@ A quick overview:
 
 All layers contain the following general fields:
 
-1. [ `originalid`](#originalid)
+1. [`originalid`](#originalid)
 2. [`name`](#name)
 3. [`type`](#type)
 
