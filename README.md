@@ -35,11 +35,11 @@ A quick overview:
 All layers contain the following general fields:
 
 1. [`originalid`](#originalid)
-2. [`name`](#name)
-3. [`type`](#type)
+2. [`type`](#type)
 
 And possibly contain the following fields:
 
+3. [`name`](#name)
 4. [`subtype`](#subtype)
 5. [`subsubtype`](#subsubtype)
 
