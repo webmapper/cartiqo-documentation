@@ -28,7 +28,7 @@ Even more detail can be found when using the `subtypes`. This is a subdivision o
 ### Layers
 A quick overview:
 
-![img](cartiqo_schema.png)
+![img](./media/cartiqo_schema.svg)
 
 ### Fields
 
