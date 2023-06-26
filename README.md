@@ -93,17 +93,18 @@ This is useful for writing a map style and allows for alternative use of the dat
 
 This is the vector tile schema describing how the thematic data layers are organized and which attributes and attributes values they have. This is useful for writing a map style.
 
-* [ `water`](#water)
-* [ `natural`](#natural)
-* [ `builtup`](#builtup)
-* [ `infrastructure`](#infrastructure)
-* [ `agricultural`](#agricultural)
-* [ `waterline`](#waterline)
-* [ `railways`](#railways)
-* [ `roads`](#roads)
-* [ `boundaries`](#boundaries)
-* [ `pois`](#pois)
-* [ `labels`](#labels)
+* [`water`](#water)
+* [`natural`](#natural)
+* [`builtup`](#builtup)
+* [`infrastructure`](#infrastructure)
+* [`agricultural`](#agricultural)
+* [`waterline`](#waterline)
+* [`railways`](#railways)
+* [`roads`](#roads)
+* [`obstructions`](#obstructions)
+* [`boundaries`](#boundaries)
+* [`pois`](#pois)
+* [`labels`](#labels)
 
 ------------------------------------------------------
 
@@ -113,15 +114,15 @@ This is the vector tile schema describing how the thematic data layers are organ
 
 ##### Fields
 
-* `originalid`
-* `name`
-* `type`
+###### `originalid`
+
+###### `name`
 
 ###### `type`
 
 The main type of the feature. 
 
-One of:
+Possible values:
 
 * `sea`
 * `tidal_flat`
@@ -136,47 +137,43 @@ Water streams in Dutch geo data sources are sometimes drawn as a Polygon and som
 
 ##### Fields
 
-* `originalid`
-* `name`
-* `type`
+###### `originalid`
+
+###### `name`
 
 ###### `type`
 
 The type of a water line is the width given by the source data. 
 
-* 3m
-* 6m
-* 12m
-* 50m
-* 125m
+Possible values:
 
+* `3m`
+* `6m`
+* `12m`
+* `50m`
+* `125m`
 
 ------------------------------------------------------
 
 #### `natural` (polygon)
 
-**`natural`** contains all nature polygons like nature areas, grass fields and forest areas. It describes the physical material of the land surface. 
-
-Together with the layers **`agriculture`**, **`infrastructure`** and **`builtup`** it covers the total surface of the Netherlands from zoom level 13 and higher. 
+**`natural`** contains all nature polygons like nature areas, grass fields and forest areas. It describes the physical material of the land surface. Together with the layers **`agriculture`**, **`infrastructure`** and **`builtup`** it covers the total surface of the Netherlands from zoom level 13 and higher. 
 
 ##### Fields
 
-* `originalid`
-* `name`
-* `type`
-* `subtype`
+###### `originalid`
+
+###### `name`
 
 ###### `type`
 
 The main type of the feature. 
 
-One of:
+Possible values:
 
 * `high` is all natural vegetation like trees and forest areas. Including tree lines. 
 * `low` covers all natural vegetation defined as grass, heather and shrubs. 
-
 * `bare` are features describing natural areas without vegetation like sand areas: dunes and sand and rock plains. 
-
 
 ###### `subtype`
 
@@ -186,12 +183,10 @@ The subtype of the feature describes the type in even more detail and can be use
     * `mixed`
     * `deciduous`
     * `coniferous`
-    
 * `low`
     * `heath`
     * `grass`
     * `shrubs`
-
 * `bare`
     * `sand`
     * `rock`
@@ -201,22 +196,27 @@ The subtype of the feature describes the type in even more detail and can be use
 
 #### `builtup` (polygon)
 
-The **`builtup`** layer contains all the urban areas and buildings. On lower zoom levels a city is represented as an urban area and on higher zoom levels the areas will be split up into building blocks and later by buildings and even more detail, entrances, walls and covers. 
-
-Together with the layers **`natural`**, **`agriculture`** and **`infrastructure`** it covers the total surface of the Netherlands from zoom level 13 and higher. 
+The **`builtup`** layer contains all the urban areas and buildings. On lower zoom levels a city is represented as an urban area and on higher zoom levels the areas will be split up into building blocks and later by buildings and even more detail, entrances, walls and covers. Together with the layers **`natural`**, **`agriculture`** and **`infrastructure`** it covers the total surface of the Netherlands from zoom level 13 and higher. 
 
 ##### Fields
 
-* `originalid`
-* `name`
-* `type`
-* `subtype`
+###### `originalid`
 
-###### `type` & `subtype`
+###### `name`
+
+###### `type`
 
 The main type of the feature. 
 
-One of:
+Possible values:
+
+* `area`
+* `building`
+* `wall`
+
+###### `subtype`
+
+Possible values:
 
 * `area`
     * ``
@@ -234,33 +234,38 @@ One of:
     * `cover`
     * `pitch`
     * `berth`
-* `wall`
-
 
 ------------------------------------------------------
 
 #### `infrastructure` (polygon)
 
-This is NOT the road infrastructure. But physical areas, human-made which are not natural or vegetation covered.  
-
-Mostly asphalt or stone coverages, often found inside urban areas. Areas supporting the road infrastructure. 
-
-Together with the layers **`agriculture`**, **`natural`** and **`builtup`** it covers the total surface of the Netherlands from zoom level 13 and higher.
+All roads as polygons, supporting the road lines. Physical areas, human-made which are not natural or vegetation covered. Mostly asphalt or stone coverages, often found inside urban areas. Together with the layers **`agriculture`**, **`natural`** and **`builtup`** it covers the total surface of the Netherlands from zoom level 13 and higher.
 
 ##### Fields
 
-* `originalid`
-* `name`
-* `type`
-* `subtype`
+###### `originalid`
 
-###### `type` & `subtype`
+###### `name`
+
+###### `type`
 
 The main type of the feature. 
 
-One of:
+Possible values:
 
 * `parking`
+* `road`
+* `railway`
+* `jetty`
+* `tunnel`
+* `bridge`
+* `runway`
+* `pavement` 
+
+###### `subtype`
+
+Possible values:
+
 * `road`
     * `motorway`
     * `transit`
@@ -271,43 +276,42 @@ One of:
     * `secondary`
     * `highway`
     * `local`
-`   * `path`
+    * `path`
 * `railway`
     * `track_surface`
     * `platform`
-* `jetty`
-* `tunnel`
-* `bridge`
-* `runway`
-* `pavement` 
 
 ------------------------------------------------------
 
 #### `agricultural` (polygon)
 
-All fields for agricultural purposes, including pastures, greenhouses, arboriculture and fallow.  
-
-
-Together with the layers **`natural`**, **`infrastructure`** and **`builtup`** it covers the total surface of the Netherlands from zoom level 13 and higher.
+All fields for agricultural purposes, including pastures, greenhouses, arboriculture and fallow. Together with the layers **`natural`**, **`infrastructure`** and **`builtup`** it covers the total surface of the Netherlands from zoom level 13 and higher.
 
 ##### Fields
 
-* `originalid`
-* `name`
-* `type`
-* `subtype`
+###### `originalid`
 
 ###### `type`
 
 The main type of the feature. 
 
-One of:
+Possible values:
   
   * `agriculture`
-  * `arboriculture` 
+  * `arboriculture`
   * `pasture`
   * `greenhouse`
   * `fallow`
+
+###### `subtype`
+
+Possible values:
+  
+  * `agriculture`
+      * `orchard`
+      * `fruit`
+  * `arboriculture`
+      * `nursery`
 
 ------------------------------------------------------
 
@@ -315,12 +319,11 @@ One of:
 
 ##### Fields
 
-* `originalid`
-* `name`
-* `type`
-* `tunnel`
+###### `originalid`
 
 ###### `type`
+
+Possible values:
 
 * `rail`
 * `tram`
@@ -331,7 +334,17 @@ One of:
 
 ###### `tunnel`
 
-If line feature is tunnel or not:  `1` `2`
+If line feature is tunnel or not:  
+
+* `true`
+* `false`
+
+###### `bridge`
+
+If line feature is bridge or not:  
+
+* `true`
+* `false`
 
 ------------------------------------------------------
 
@@ -339,14 +352,13 @@ If line feature is tunnel or not:  `1` `2`
 
 ##### Fields
 
-* `originalid`
-* `name`
-* `type`
-* `tunnel`
-* `road_number`
-* `relative_height`
+###### `originalid`
+
+###### `name`
 
 ###### `type`
+
+Possible values:
 
 * `highway`
 * `motorway`
@@ -355,31 +367,64 @@ If line feature is tunnel or not:  `1` `2`
 * `local`
 * `bike`
 * `path`
-* 'ferry'
-
+* `ferry`
 
 ###### `tunnel`
 
-If line feature is tunnel or not:  `1` `0`
+If line feature is tunnel or not:
+
+* `true`
+* `false`
+
+###### `bridge`
+
+If line feature is bridge or not:  
+
+* `true`
+* `false`
+
+###### `oneway`
+
+* `-1`
+* `0`
+* `1`
 
 ###### `road_number`
 
 Dutch road number classification if available. Like A roads and N road numbers. These roads often contain a name and a number, so this can be used for double labeling. 
+
+------------------------------------------------------
+
+#### `obstructions` (line)
+
+##### Fields
+
+###### `originalid`
+
+###### `type`
+
+Possible values:
+
+* `hedge`
+* `fence`
+* `wall`
+* `railing`
  
 ------------------------------------------------------
 
 #### `boundaries` (line)
 
-Administrative boundaries of countries, provinces and municipalities. Will be expanded with regions and neighborhoods in the next editions. 
+Administrative boundaries of countries, provinces and municipalities.
 
 ##### Fields
 
-* `originalid`
-* `name`
-* `type`
-* `subtype`
+###### `originalid`
+
+###### `name`
 
 ###### `type`
+
+Possible values:
 
 * `country`
 * `province`
@@ -387,10 +432,11 @@ Administrative boundaries of countries, provinces and municipalities. Will be ex
 
 ###### `subtype` 
 
+Possible values:
+
 * `country`
     * `foreign`
     * `domestic`
-
 
 ------------------------------------------------------
 
@@ -400,18 +446,20 @@ Points of interest which usually are visualized with an icon. Human-made functio
 
 ##### Fields
 
-* `originalid`
-* `name`
-* `type`
-* `subtype`
-* `hierarchy`
+###### `originalid`
+
+###### `name`
 
 ###### `type`
 
+Possible values:
+
 * `food_drink`
-All food and drink occasions. 
+All food and drink occasions.
+
 * `public_building`
 A public building with general purposes.
+
 * `public_space`
 Public areas which are not buildings but fields or areas with a functionality. Like a harbour, industry, dog park or playground. Nature areas which describe physical areas are not in this layer but in Labels. POIs describe an area with a human decided function assigned. 
 
@@ -422,6 +470,8 @@ Public transport stops.
 Commercial shops other then food and drink. 
 
 ###### `subtype`
+
+Possible values:
 
 * `food_drink`
     * `drink`
@@ -451,19 +501,22 @@ Commercial shops other then food and drink.
 
 ###### `subsubtype`
 
-The `subsubtype` of a POI feature is the original description from source data the POI is derived from. (mainly OSM) 
-
+The `subsubtype` of a POI feature is the original description from source data the POI is derived from (mainly OSM).
 
 ###### `hierarchy`
-The label hierarchy or size/importance per POI category.
-
-Top10NL data is considered priority. Then Polygon sources and larger areas. Then POINTS
-
-Most features must contain a name to be considered in the data. Except for the Parking places. Which are hierarchical ordered according to having a name or not. 
-
-Parks are also hierarchical ordered to name and area size. 
+The label hierarchy or size/importance per POI category. Top10NL data is considered priority. Then Polygon sources and larger areas. Then POINTS. Most features must contain a name to be considered in the data. Except for the Parking places. Which are hierarchical ordered according to having a name or not. Parks are also hierarchical ordered to name and area size. 
 
 See [POIs_decision.ods](https://github.com/webmapper/cartiqo-documentation/blob/master/POIs_decision.ods) for a complete overview of the decisions made. 
+
+Possible values:
+
+* `1`
+* `2`
+* `3`
+* `4`
+* `5`
+* `6`
+* `10`
 
 ------------------------------------------------------
 
@@ -475,38 +528,34 @@ Also including address numbers at zoom level 16.
 
 ##### Fields
 
-* `originalid`
-* `name`
-* `type`
-* `subtype`
-* `subsubtype`
-* `hierarchy`
-* `rotation`
+###### `originalid`
+
+###### `name`
 
 ###### `type`
 
-* `place` 
+Possible values:
 
+* `place` 
 Place names of inhabited places like cities, large towns, small towns and hamlets in the Netherlands. Also including urban district names as used by inhabitants (different form administrative districts).
 
 * `admin` 
-
 Administrative names from administrative areas according to the CBS. Placed as a point inside the area. 
 
 * `water`
-
-Relevant water names of physical areas.  (not harbors)
+Relevant water names of physical areas (not harbors).
 
 * `nature`
-
-Relevant nature area names. Only large nature areas. (not gardens and dog parks)
+Relevant nature area names. Only large nature areas (not gardens and dog parks).
 
 * `address`
+Address numbers and letters, available at zoom level 16.
 
-Address numbers and letters, available at zoom level 16. 
+* `milestone`
 
+###### `subtype` & `subsubtypes`
 
-###### `subtype` & `subsubtypes
+Possible values:
 
 * `place`
     * `urban_district`
@@ -554,14 +603,14 @@ A quick description of the most important appearances of data per zoom level:
 
 - Agricultural areas are added
 - Municipality boundaries
-- water labels
+- Water labels
 
 #### Zoom level 10 - 11
 
-- Nature and industrial labels.
-- Railways for train.
-- Main roads.
-- Infrastructure railway areas. 
+- Nature and industrial labels
+- Railways for train
+- Main roads
+- Infrastructure railway areas
 
 #### Zoom level 12
 
@@ -570,21 +619,22 @@ A quick description of the most important appearances of data per zoom level:
 
 #### Zoom level 13
 
-- Agricultural pasture appears. Covering all the surface of the Netherlands. ! Note this is a big change in how the map looks !
-- Built up buildings. 
-- Almost all infrastructure areas. 
+- Agricultural pasture appears. Covering all the surface of the Netherlands. **! Note this is a big change in how the map looks !**
+- Built up buildings
+- Almost all infrastructure areas 
 - Local roads
+- Obstructions
 
 #### Zoom level 14
 
-- bike and path roads are added. 
+- Bike and path roads are added
 
 #### Zoom level 15 
 
-- All railways, tram, metro etc included.
+- All railways, tram, metro etc included
 
 #### Zoom level 16
 
 - Individual buildings
-- walls 
-- Infrastructure areas of tunnels and bridges. 
+- Walls 
+- Infrastructure areas of tunnels and bridges
