@@ -8,12 +8,12 @@ Cartiqo is hosted at our partner [Maptiler](https://cloud.maptiler.com/tiles/nl-
 
 ## Vector Tile Contents
 
-1. [Philosophy](#Philosophy)
-2. [Layer overview](#Layers)
-3. [Fields explanation](#Fields)
-4. [Source data](#Source-Data )
-5. [In depth description of data layers](#Data-Layers)
-6. [In depth description per zoom level](#Data-per-Zoom-Level)
+1. [Philosophy](#philosophy)
+2. [Layer overview](#layers)
+3. [Fields explanation](#fields)
+4. [Source data](#source-data )
+5. [In depth description of data layers](#thematic-data-layers)
+6. [In depth description per zoom level](#data-per-zoom-level)
 
 ### Philosophy
 
@@ -93,18 +93,18 @@ This is useful for writing a map style and allows for alternative use of the dat
 
 This is the vector tile schema describing how the thematic data layers are organized and which attributes and attributes values they have. This is useful for writing a map style.
 
-* [`agricultural`](#agricultural)
-* [`boundaries`](#boundaries)
-* [`builtup`](#builtup)
-* [`infrastructure`](#infrastructure)
-* [`labels`](#labels)
-* [`natural`](#natural)
-* [`obstructions`](#obstructions)
-* [`pois`](#pois)
-* [`railways`](#railways)
-* [`roads`](#roads)
-* [`water`](#water)
-* [`waterline`](#waterline)
+* [`agricultural`](#agricultural-polygon)
+* [`boundaries`](#boundaries-line)
+* [`builtup`](#builtup-polygon)
+* [`infrastructure`](#infrastructure-polygon)
+* [`labels`](#labels-point)
+* [`natural`](#natural-polygon)
+* [`obstructions`](#obstructions-line)
+* [`pois`](#pois-point)
+* [`railways`](#railways-line)
+* [`roads`](#roads-line)
+* [`water`](#water-polygon)
+* [`waterline`](#waterline-line)
 
 ------------------------------------------------------
 
