@@ -335,7 +335,7 @@ The main type of the feature.
 Possible values:
 
 * `bare` are features describing natural areas without vegetation like sand areas: dunes and sand and rock plains. 
-* `high` is all natural vegetation like trees and forest areas. Including tree lines. 
+* `high` is all natural vegetation like trees and forest areas, including tree lines. 
 * `low` covers all natural vegetation defined as grass, heather and shrubs. 
 
 ###### `subtype`
@@ -438,7 +438,7 @@ Possible values:
 The `subsubtype` of a POI feature is the original description from source data the POI is derived from (mainly OSM).
 
 ###### `hierarchy`
-The label hierarchy or size/importance per POI category. Top10NL data is considered priority. Then Polygon sources and larger areas. Then POINTS. Most features must contain a name to be considered in the data. Except for the Parking places. Which are hierarchical ordered according to having a name or not. Parks are also hierarchical ordered to name and area size. 
+The label hierarchy or size/importance per POI category. Top10NL data is considered priority. Then polygon sources and larger areas, then points. Most features must contain a name to be considered in the data. Except for the parking places. Which are hierarchical ordered according to having a name or not. Parks are also hierarchical ordered to name and area size. 
 
 See [POIs_decision.ods](https://github.com/webmapper/cartiqo-documentation/blob/master/POIs_decision.ods) for a complete overview of the decisions made. 
 
@@ -529,7 +529,7 @@ If line feature is tunnel or not:
 
 ###### `road_number`
 
-Dutch road number classification if available. Like A roads and N road numbers. These roads often contain a name and a number, so this can be used for double labeling. 
+Dutch road number classification if available. Like A-roads and N-road numbers. These roads often contain a name and a number, so this can be used for double labeling. 
 
 ------------------------------------------------------
 
@@ -558,7 +558,7 @@ Possible values:
 
 #### `waterline` (line)
 
-Water streams in Dutch geo data sources are sometimes drawn as a Polygon and sometimes as a Line. Therefore a separate layer for water lines is provided. **Note!** a water body or stream is not defined by the geometry. Water streams can be drawn as a line or a polygon. Water bodies are often given as polygons but also larger rivers are given as polygons. No explicit reasons can be found for this difference. Mostly water drawn as lines are smaller water streams like ditches between fields.
+Water streams in Dutch geo data sources are sometimes drawn as a Polygon and sometimes as a Line. Therefore a separate layer for water lines is provided. **Note!** A water body or stream is not defined by the geometry. Water streams can be drawn as a line or a polygon. Water bodies are often given as polygons but also larger rivers are given as polygons. No explicit reasons can be found for this difference. Mostly water drawn as lines are smaller water streams like ditches between fields.
 
 ##### Fields
 
@@ -592,14 +592,14 @@ A quick description of the most important appearances of data per zoom level:
 
 #### Zoom level 5 - 8
 
-- World wide water bodies and country boundaries. Also world wide country names in labels
+- World wide water bodies and country boundaries. Also world wide country names in labels.
 - Built up areas, natural areas and water areas in the Netherlands
 - Highways and main road
 - Largest cities labels of the Netherlands
 
 #### Zoom level 9 
 
-- Agricultural areas are added
+- Agricultural areas
 - Municipality boundaries
 - Water labels
 
@@ -612,12 +612,12 @@ A quick description of the most important appearances of data per zoom level:
 
 #### Zoom level 12
 
-- All POIs are present 
+- All POIs
 - Secondary roads
 
 #### Zoom level 13
 
-- Agricultural pasture appears. Covering all the surface of the Netherlands. **! Note this is a big change in how the map looks !**
+- Agricultural pasture: covering all the surface of the Netherlands. **! Note this is a big change in how the map looks !**
 - Built up buildings
 - Almost all infrastructure areas 
 - Local roads
@@ -625,11 +625,11 @@ A quick description of the most important appearances of data per zoom level:
 
 #### Zoom level 14
 
-- Bike and path roads are added
+- Bike and path roads
 
 #### Zoom level 15 
 
-- All railways, tram, metro etc included
+- All railways (tram, metro etc included)
 
 #### Zoom level 16
 
